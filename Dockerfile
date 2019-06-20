@@ -1,6 +1,6 @@
-FROM anoop600/tomcat
+FROM tomcat
 
-MAINTAINER anoop
+MAINTAINER prasanna.rajasekaran@mindtree.com
 
 COPY target/*.war /usr/local/tomcat/webapps/
 

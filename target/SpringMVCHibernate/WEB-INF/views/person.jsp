@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ page session="false"%>
+<!DOCTYPE>
 <html>
 <head>
 <title>Person Page</title>
@@ -48,7 +49,7 @@
 }
 </style>
 </head>
-<body background="background1.jpg">
+<body>
 	<h1>Add a Person</h1>
 
 	<c:url var="addAction" value="/person/add"></c:url>

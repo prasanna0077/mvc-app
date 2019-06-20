@@ -32,14 +32,14 @@
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<beans:property name="driverClassName"
 	value="com.mysql.jdbc.Driver" />
-	<!--	<beans:property name="url"
-			value="jdbc:mysql://172.17.0.3:3306/spring" />
+		<beans:property name="url"
+			value="jdbc:mysql://172.17.0.4:3306/spring" />
 		<beans:property name="username" value="root" />
-		<beans:property name="password" value="password" /> -->
-                <beans:property name="url"
-                        value="jdbc:mysql://cmpeh54680dns.eastus2.cloudapp.azure.com:3306/spring" />
+		<beans:property name="password" value="password" /> 
+        <!--        <beans:property name="url"
+                        value="jdbc:mysql://localhost:3306/spring" />
                 <beans:property name="username" value="root" />
-                <beans:property name="password" value="password" />
+                <beans:property name="password" value="password" /> -->
 	</beans:bean>
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
