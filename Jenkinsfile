@@ -9,7 +9,6 @@ pipeline {
 	        stagingServer = 'staging-myproject.mycompany.com'
 	        productionServer = 'production-myproject.mycompany.com'
 		deploymentuser = readFile '/home/vmadmin441/user/tomuser'
-		echo deploymentuser
 	    }
 	    
 	    tools {
