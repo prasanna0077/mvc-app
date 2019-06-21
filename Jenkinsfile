@@ -87,7 +87,7 @@ pipeline {
 					"files": [
 					  {
 						"pattern": "Prasanna/${env.BUILD_NUMBER}/*.war",
-						"target": "target"
+						"target": ""
 					  }
 					]
 				  }"""
