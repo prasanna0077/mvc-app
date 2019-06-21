@@ -99,7 +99,7 @@ pipeline {
 		   stage('Deploy War to Tomcat') {
 			    steps {
 				echo 'Deploying....'
-				scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war root@my58781dns.EastUS2.cloudapp.azure.com:/docker
+				sh 'scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war root@my58781dns.EastUS2.cloudapp.azure.com:/docker'
 			    }
 			}
 		}
