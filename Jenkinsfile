@@ -8,6 +8,8 @@ pipeline {
 	        developmentServer = 'dev-myproject.mycompany.com'
 	        stagingServer = 'staging-myproject.mycompany.com'
 	        productionServer = 'production-myproject.mycompany.com'
+		deploymentuser = readFile '/home/vmadmin441/user/tomuser'
+		echo deploymentuser
 	    }
 	    
 	    tools {
@@ -99,9 +101,7 @@ pipeline {
 		   stage('Deploy War to Tomcat') {
 			    steps {
 				echo 'Deploying....'
-				deploymentuser = readFile '/home/vmadmin441/user/tomuser'
-				echo "${deploymentuser}"
-				
+								
 				//sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war minduseradmin@my58781dns.EastUS2.cloudapp.azure.com:/home/minduseradmin/Docker"
 				sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war deploymentuser:/home/minduseradmin/Docker"
 			    }
