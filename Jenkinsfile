@@ -8,6 +8,7 @@ pipeline {
 	        developmentServer = 'dev-myproject.mycompany.com'
 	        stagingServer = 'staging-myproject.mycompany.com'
 	        productionServer = 'production-myproject.mycompany.com'
+		deploymentuser = credentials('deploymentuser')
 	    }
 	    
 	    tools {
