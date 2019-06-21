@@ -95,6 +95,7 @@ pipeline {
 				  server.download(downloadSpec)
 					 }
 				 }
+			 }
 		   }
 		   stage('Deploy War to Tomcat') {
 			    steps {
