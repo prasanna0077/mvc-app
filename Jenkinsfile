@@ -1,0 +1,87 @@
+pipeline {
+	    agent any
+	    environment {
+	        branch = 'master'
+	        scmUrl = ' https://github.com/prasanna0077/mvc-app.git'
+	        serverPort = '8080'
+	        scannerHome = tool 'sonar'
+	        developmentServer = 'dev-myproject.mycompany.com'
+	        stagingServer = 'staging-myproject.mycompany.com'
+	        productionServer = 'production-myproject.mycompany.com'
+	    }
+	    
+	    tools {
+	    maven 'M3'
+	  }
+	    stages {
+	        stage('checkout git') {
+	            steps {
+	                git branch: branch, credentialsId: 'Git', url: scmUrl
+	            }
+	        }
+			stage('build') {
+	            steps {
+	                
+	                sh 'mvn clean install'
+	            }
+	        }
+	        stage('Sonarqube') {
+	  
+	             steps {
+	                   withSonarQubeEnv('Sonar') {
+	                        sh "mvn sonar:sonar"
+	                     }
+	             }
+	        }
+	        
+			stage('Sonar scan result check') {
+	            steps {
+	                timeout(time: 5, unit: 'MINUTES') {
+	                    retry(3) {
+	                        script {
+	                            def qg = waitForQualityGate()
+	                            if (qg.status != 'OK') {
+	                                error "Pipeline aborted due to quality gate failure: ${qg.status}"
+	                            }
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	        	
+	        stage ('test') {
+	            steps {
+	                parallel (
+	                    "unit tests": { sh 'mvn test' },
+	                    "integration tests": { sh 'mvn integration-test' }
+	                )
+	            }
+	        }
+	        
+	     stage('Push to Artifactory') {
+	         steps{
+	             script {
+				  // Push to Artifactory
+				  def server = Artifactory.server "VM1-Artifactory"
+			
+				  def uploadSpec = """{
+					"files": [
+					  {
+						"pattern": "target/*.war",
+						"target": "Prasanna/${env.BUILD_NUMBER}/"
+					  }
+					]
+				  }"""
+				  // Upload to Artifactory.
+				  server.upload(uploadSpec)
+					 }
+				 }
+		   }
+		       
+	    }
+	post {
+		failure {
+			mail to: 'prasanna.rajasekaran@mindtree.com', subject: 'Pipeline failed', body: "${env.BUILD_URL}"
+		}
+	}
+}
