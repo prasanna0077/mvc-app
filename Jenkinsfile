@@ -100,8 +100,8 @@ pipeline {
 			    steps {
 				echo 'Deploying....'
 								
-				sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war minduseradmin@my58781dns.EastUS2.cloudapp.azure.com:/home/minduseradmin/Docker"
-				//sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war deploymentuser:/home/minduseradmin/Docker"
+				//sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war minduseradmin@my58781dns.EastUS2.cloudapp.azure.com:/home/minduseradmin/Docker"
+				sh "scp ./artifacts/${env.BUILD_NUMBER}/SpringMVCHibernate.war ${deploymentuser}:/home/minduseradmin/Docker"
 			    }
 			}
 		}
